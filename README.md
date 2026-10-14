@@ -48,6 +48,64 @@ DAX Measures
         ↓
 Interactive Power BI Dashboard
 
+See the detailed architecture:
+[Architecture](architecture.md)
+📐 Data Model
+The analytical model contains property, room, bed, tenant, rent, expense, occupancy and operations data.
+
+📈 Dashboard
+The Power BI report contains multiple analytical pages:
+- Overview
+- Revenue
+- Occupancy
+- Operations
+- Tenants
+- Complaints
+The dashboard provides interactive PG-level filtering and KPI analysis.
+🧮 Key KPIs
+Examples of analytical measures include:
+- Total Beds
+- Occupied Beds
+- Occupancy %
+- Rent Collected
+- Outstanding Rent
+- Total Expenses
+- Net Revenue
+- Month-over-Month Rent Collection
+- Property-level performance
+DAX measures are available in:
+measures.dax
+🗄️ SQL
+SQL scripts are included for:
+- Table creation
+- Data quality checks
+- Business KPI queries
+Files:
+- 01_create_tables.sql
+- 02_data_quality_checks.sql
+- 03_business_queries.sql
+📁 Repository Structure
+PG_Property_Analytics/
+│
+├── README.md
+├── LICENSE
+├── .gitignore
+│
+├── *.csv
+├── *.sql
+├── measures.dax
+│
+├── dashboard_overview.png
+├── architecture.png
+├── data_model.png
+│
+├── architecture.md
+├── data_model.md
+├── dashboard_pages.md
+├── REPORT_SETUP.md
+├── interview_guide.md
+└── resume_project_entry.md
+
 💼 Skills Demonstrated
 - SQL
 - Microsoft Fabric
@@ -59,4 +117,5 @@ Interactive Power BI Dashboard
 - Dashboard Design
 - Business Analysis
 - Analytical Reporting
-
+👤 Portfolio Project
+Created as a portfolio project to demonstrate practical Data Analyst / BI Analyst capabilities using Microsoft Fabric, SQL and Power BI.
