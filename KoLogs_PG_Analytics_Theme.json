@@ -1,0 +1,25 @@
+{
+  "name": "KoLogs PG Analytics",
+  "dataColors": [
+    "#3FAFA5",
+    "#F28B62",
+    "#F59E0B",
+    "#EF4444",
+    "#2563EB",
+    "#7C3AED"
+  ],
+  "background": "#F4F6F8",
+  "foreground": "#111827",
+  "tableAccent": "#3FAFA5",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "fontFamily": [
+          {
+            "fontFamily": "Segoe UI"
+          }
+        ]
+      }
+    }
+  }
+}

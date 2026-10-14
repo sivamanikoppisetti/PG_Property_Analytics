@@ -1,0 +1,130 @@
+-- KoLogs PG Property Analytics
+-- Reusable Power BI measures
+
+-- Capacity
+Total Beds =
+DISTINCTCOUNT(beds[Bed_ID])
+
+Total Rooms =
+DISTINCTCOUNT(rooms[Room_ID])
+
+Occupied Beds =
+VAR LatestSnapshot =
+    MAX(daily_occupancy[Snapshot_Date])
+RETURN
+CALCULATE(
+    SUM(daily_occupancy[Occupied_Beds]),
+    daily_occupancy[Snapshot_Date] = LatestSnapshot
+)
+
+Available Beds =
+[Total Beds] - [Occupied Beds]
+
+Occupancy % =
+DIVIDE(
+    [Occupied Beds],
+    [Total Beds],
+    0
+)
+
+
+-- Finance
+Rent Collected =
+SUM(rent_transactions[Amount_Paid])
+
+Outstanding Rent =
+SUM(rent_transactions[Outstanding_Amount])
+
+Total Rent Due =
+SUM(rent_transactions[Amount_Due])
+
+Total Expenses =
+SUM(expenses[Amount])
+
+Net Revenue =
+[Rent Collected] - [Total Expenses]
+
+Collection % =
+DIVIDE(
+    [Rent Collected],
+    [Total Rent Due],
+    0
+)
+
+
+-- Revenue growth
+MoM Rent Collection % Change =
+VAR CurrentMonth =
+    [Rent Collected]
+VAR PreviousMonth =
+    CALCULATE(
+        [Rent Collected],
+        DATEADD(dim_date[Date], -1, MONTH)
+    )
+RETURN
+DIVIDE(
+    CurrentMonth - PreviousMonth,
+    PreviousMonth,
+    0
+)
+
+
+-- Property ranking
+PG Revenue Rank =
+RANKX(
+    ALLSELECTED(pg_master[PG_Name]),
+    [Rent Collected],
+    ,
+    DESC,
+    DENSE
+)
+
+PG Occupancy Rank =
+RANKX(
+    ALLSELECTED(pg_master[PG_Name]),
+    [Occupancy %],
+    ,
+    DESC,
+    DENSE
+)
+
+
+-- Operational KPIs
+Total Complaints =
+COUNTROWS(complaints)
+
+Resolved Complaints =
+CALCULATE(
+    COUNTROWS(complaints),
+    complaints[Status] = "Resolved"
+)
+
+Complaint Resolution % =
+DIVIDE(
+    [Resolved Complaints],
+    [Total Complaints],
+    0
+)
+
+Total Checkins =
+SUM(daily_operations[Checkins])
+
+Total Checkouts =
+SUM(daily_operations[Checkouts])
+
+Maintenance Jobs =
+SUM(daily_operations[Maintenance_Jobs])
+
+
+-- Tenant movement
+Move Ins =
+CALCULATE(
+    COUNTROWS(tenant_movements),
+    tenant_movements[Movement_Type] = "Move-In"
+)
+
+Move Outs =
+CALCULATE(
+    COUNTROWS(tenant_movements),
+    tenant_movements[Movement_Type] = "Move-Out"
+)

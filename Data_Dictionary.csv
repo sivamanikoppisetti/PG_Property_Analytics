@@ -1,0 +1,14 @@
+Table,Type,Grain
+PG_Master,Dimension,1 row per property
+Rooms,Dimension,1 row per room
+Beds,Dimension,1 row per bed
+Tenants,Dimension,1 row per tenant
+Tenant_SCD2,Dimension,SCD Type 2 tenant history
+Tenant_Movements,Fact,1 row per movement event
+Rent_Transactions,Fact,1 row per tenant x billing month
+Expenses,Fact,1 row per expense
+Electricity,Fact,1 row per PG x month
+Complaints,Fact,1 row per complaint
+Daily_Occupancy,Snapshot,1 row per PG x day
+Daily_Operations,Snapshot,1 row per PG x day
+Dim_Date,Dimension,1 row per date
