@@ -84,6 +84,8 @@ Files:
 - 01_create_tables.sql
 - 02_data_quality_checks.sql
 - 03_business_queries.sql
+
+
 📁 Repository Structure
 PG_Property_Analytics/
 │
